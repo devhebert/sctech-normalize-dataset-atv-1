@@ -1,5 +1,9 @@
 # Projeto: Processamento e Limpeza do Dataset Olist
 
+Visualização do fluxo do pipeline:
+
+![Fluxograma do pipeline](resources/flow.png)
+
 Este repositório contém um pipeline simples de ETL (Extract, Transform, Load) para
 limpeza, normalização e versionamento de arquivos CSV do dataset `olist`.
 
