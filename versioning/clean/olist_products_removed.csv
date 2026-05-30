@@ -1,3 +1,0 @@
-product_id,product_category_name,product_name_lenght,product_description_lenght,product_photos_qty,product_weight_g,product_length_cm,product_height_cm,product_width_cm,_removed_reason,_missing_fields
-09ff539a621711667c43eba6a3bd8466,bebes,60,865,3,,,,,missing_or_invalid_physical_dimensions,product_weight_g;product_length_cm;product_height_cm;product_width_cm
-5eb564652db742ff8f28759cd8d2652a,,,,,,,,,missing_or_invalid_physical_dimensions,product_weight_g;product_length_cm;product_height_cm;product_width_cm

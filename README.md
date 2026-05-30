@@ -59,9 +59,6 @@ Estrutura de pastas
 
 projeto/
 - main.py
-- dataset/
-  - olist_orders_dataset.csv
-  - olist_products_dataset.csv
 - infrastructure/
   - config.py
   - initial_data_loader.py
@@ -72,6 +69,10 @@ projeto/
   - ProductCategoryStats.py
   - enum/
     - ProductColumn.py
+- resources/
+  - dataset/
+    - olist_orders_dataset.csv
+    - olist_products_dataset.csv
 - service/
   - product_service_impl.py
   - order_service_impl.py
@@ -89,7 +90,7 @@ projeto/
 Fluxo de execução (ETL)
 -----------------------
 1. `load_dataset_files()`
-   - Verifica existência do diretório `dataset` e dos arquivos esperados.
+   - Verifica existência do diretório `/resources/dataset` e dos arquivos esperados.
    - Lê `olist_orders_dataset.csv` como lista (carrega em memória).
    - Lê `olist_products_dataset.csv` como iterador (streaming).
 

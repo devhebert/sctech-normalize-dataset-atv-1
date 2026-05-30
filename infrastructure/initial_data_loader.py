@@ -51,7 +51,7 @@ def load_dataset_files() -> DatasetFiles:
     """
     # obtém o diretório base do projeto (dois níveis acima deste arquivo)
     base_path: Path = Path(__file__).resolve().parent.parent;
-    dataset_directory: Path = base_path / 'dataset';
+    dataset_directory: Path = base_path / 'resources/dataset';
 
     if not dataset_directory.exists():
         # erro claro em português para facilitar debugging
