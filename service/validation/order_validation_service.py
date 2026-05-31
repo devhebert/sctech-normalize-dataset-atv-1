@@ -12,10 +12,11 @@ normalização ou análise.
 def _is_missing(value: Optional[str]) -> bool:
     """Retorna True se `value` for considerado ausente/nulo."""
     if value is None:
-        return True
+        return True;
     if isinstance(value, str) and value.strip() == '':
-        return True
-    return False
+        return True;
+
+    return False;
 
 
 def validate_orders(orders: List[Dict[str, str]]) -> tuple[List[Dict[str, str]], List[Dict[str, object]]]:
@@ -26,16 +27,16 @@ def validate_orders(orders: List[Dict[str, str]]) -> tuple[List[Dict[str, str]],
     `removed_records` contém dicionários com o pedido original, campos
     faltantes e o motivo para remoção.
     """
-    valid_orders: List[Dict[str, str]] = []
-    removed_records: List[Dict[str, object]] = []
+    valid_orders: List[Dict[str, str]] = [];
+    removed_records: List[Dict[str, object]] = [];
 
     for order in orders:
-        missing_fields: List[str] = []
+        missing_fields: List[str] = [];
         # checa os campos obrigatórios
         if _is_missing(order.get('order_id')):
-            missing_fields.append('order_id')
+            missing_fields.append('order_id');
         if _is_missing(order.get('customer_id')):
-            missing_fields.append('customer_id')
+            missing_fields.append('customer_id');
 
         if missing_fields:
             # registra o pedido removido com detalhes para auditoria
@@ -43,11 +44,11 @@ def validate_orders(orders: List[Dict[str, str]]) -> tuple[List[Dict[str, str]],
                 'order': dict(order),
                 'missing_fields': missing_fields,
                 'reason': 'missing_order_or_customer_id'
-            })
+            });
             continue
 
         # pedido válido
-        valid_orders.append(order)
+        valid_orders.append(order);
 
-    return valid_orders, removed_records
+    return valid_orders, removed_records;
 

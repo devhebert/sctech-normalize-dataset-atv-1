@@ -20,22 +20,22 @@ def _safe_parse_numeric(value: Optional[str], dtype: str) -> Optional[float]:
     trata None.
     """
     if value is None:
-        return None
+        return None;
 
     if isinstance(value, (int, float)):
-        return float(value)
+        return float(value);
 
     # remove espaços em torno e trata strings vazias/NA
-    string_value = str(value).strip()
+    string_value = str(value).strip();
     if string_value == '' or string_value.upper() == 'NA':
-        return None
+        return None;
 
     # aceita vírgula como separador decimal
-    string_value = string_value.replace(',', '.')
+    string_value = string_value.replace(',', '.');
     try:
-        return float(string_value)
+        return float(string_value);
     except ValueError:
-        return None
+        return None;
 
 
 def validate_products(products: list[dict[str, str]]) -> tuple[list[dict[str, str]], list[dict[str, object]]]:
@@ -55,20 +55,20 @@ def validate_products(products: list[dict[str, str]]) -> tuple[list[dict[str, st
         ProductColumn.PRODUCT_LENGTH_CM.value,
         ProductColumn.PRODUCT_HEIGHT_CM.value,
         ProductColumn.PRODUCT_WIDTH_CM.value,
-    ]
+    ];
 
     sanitized_list: list[dict[str, str]] = []
     removed_record_list: list[dict[str, object]] = []
 
     for product in products:
-        missing_list: list[str] = []
+        missing_list: list[str] = [];
         for column in physical_columns:
             # obtém o valor da coluna (string ou '' se ausente)
-            value = product.get(column, '')
-            num = _safe_parse_numeric(value, 'float')
-            if num is None:
+            value = product.get(column, '');
+            type_number = _safe_parse_numeric(value, 'float');
+            if type_number is None:
                 # marca coluna como faltante/inválida
-                missing_list.append(column)
+                missing_list.append(column);
 
         if missing_list:
             # registra o produto removido com detalhes para auditoria
@@ -76,10 +76,10 @@ def validate_products(products: list[dict[str, str]]) -> tuple[list[dict[str, st
                 'product': dict(product),
                 'missing_fields': missing_list,
                 'reason': 'missing_or_invalid_physical_dimensions'
-            })
+            });
             continue
 
         # produto validado com sucesso
-        sanitized_list.append(product)
+        sanitized_list.append(product);
 
-    return sanitized_list, removed_record_list
+    return sanitized_list, removed_record_list;

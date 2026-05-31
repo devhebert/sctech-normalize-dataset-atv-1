@@ -22,19 +22,20 @@ def _format_order_approved_dates(orders: List[Dict[str, str]]) -> int:
 			continue
 		if not isinstance(raw, str) or raw.strip() == '':
 			continue
-		s = raw.strip()
+		type_string = raw.strip();
 		try:
-			dt = datetime.strptime(s, '%Y-%m-%d %H:%M:%S')
-			order['order_approved_at'] = dt.strftime('%d/%m/%Y')
-			formatted_count += 1
+			date_time = datetime.strptime(type_string, '%Y-%m-%d %H:%M:%S');
+			order['order_approved_at'] = date_time.strftime('%d/%m/%Y');
+			formatted_count += 1;
 		except Exception:
 			try:
-				dt = datetime.fromisoformat(s)
-				order['order_approved_at'] = dt.strftime('%d/%m/%Y')
-				formatted_count += 1
+				date_time = datetime.fromisoformat(type_string);
+				order['order_approved_at'] = date_time.strftime('%d/%m/%Y');
+				formatted_count += 1;
 			except Exception:
 				continue
-	return formatted_count
+
+	return formatted_count;
 
 
 def _separate_missing_delivery_dates(orders: List[Dict[str, str]]) -> Dict[str, object]:
@@ -42,19 +43,19 @@ def _separate_missing_delivery_dates(orders: List[Dict[str, str]]) -> Dict[str, 
 
 	Conta quantos desses têm status cancelado e retorna listas/contagens.
 	"""
-	missing_records: List[Dict[str, str]] = []
-	missing_and_canceled: List[Dict[str, str]] = []
-	missing_and_not_canceled: List[Dict[str, str]] = []
+	missing_records: List[Dict[str, str]] = [];
+	missing_and_canceled: List[Dict[str, str]] = [];
+	missing_and_not_canceled: List[Dict[str, str]] = [];
 
 	for order in orders:
-		val = order.get('order_delivered_customer_date')
-		if val is None or (isinstance(val, str) and val.strip() == ''):
-			missing_records.append(order)
-			status = (order.get('order_status') or '').strip().lower()
+		value = order.get('order_delivered_customer_date')
+		if value is None or (isinstance(value, str) and value.strip() == ''):
+			missing_records.append(order);
+			status = (order.get('order_status') or '').strip().lower();
 			if status in ('canceled', 'cancelled'):
-				missing_and_canceled.append(order)
+				missing_and_canceled.append(order);
 			else:
-				missing_and_not_canceled.append(order)
+				missing_and_not_canceled.append(order);
 
 	return {
 		'total_missing': len(missing_records),
@@ -62,17 +63,17 @@ def _separate_missing_delivery_dates(orders: List[Dict[str, str]]) -> Dict[str, 
 		'missing_not_canceled': len(missing_and_not_canceled),
 		'missing_records': missing_records,
 		'missing_not_canceled_records': missing_and_not_canceled,
-	}
+	};
 
 
 def _rules_executor(orders: List[Dict[str, str]]) -> None:
-	formatted = _format_order_approved_dates(orders)
-	print(f'Datas de aprovação formatadas: {formatted}')
+	formatted = _format_order_approved_dates(orders);
+	print(f'Datas de aprovação formatadas: {formatted}');
 
 	separation = _separate_missing_delivery_dates(orders)
-	print(f'Total de pedidos com order_delivered_customer_date ausente: {separation["total_missing"]}')
-	print(f'Desses, com status cancelado: {separation["missing_canceled"]}')
-	print(f'Desses, sem status cancelado: {separation["missing_not_canceled"]}')
+	print(f'Total de pedidos com order_delivered_customer_date ausente: {separation["total_missing"]}');
+	print(f'Desses, com status cancelado: {separation["missing_canceled"]}');
+	print(f'Desses, sem status cancelado: {separation["missing_not_canceled"]}');
 
 
 def normalize_values(orders: List[Dict[str, str]]) -> List[Dict[str, str]]:
@@ -91,10 +92,9 @@ def normalize_values(orders: List[Dict[str, str]]) -> List[Dict[str, str]]:
 
 	# Chama o executor de regras passando a lista de pedidos.
 	# `_rules_executor` realiza as mudanças em-place na estrutura fornecida.
-	_rules_executor(orders)
+	_rules_executor(orders);
 
 	# Retorna a lista (modificada) para facilitar encadeamento/uso pelo chamador.
-	return orders
-
+	return orders;
 
 

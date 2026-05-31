@@ -49,27 +49,27 @@ def main() -> None:
     prod_status = saver.save_products(normalized_products, removed_products)
     if prod_status.get('sanitized'):
         if prod_status['sanitized'] == 'no_change':
-            print('Nenhuma alterao no arquivo de produtos; no criou backup nem sobrescreveu.')
+            print('Nenhuma alterao no arquivo de produtos; no criou backup nem sobrescreveu.');
         else:
-            print(f"{prod_status['sanitized'].capitalize()} e backup salvo para produtos")
+            print(f"{prod_status['sanitized'].capitalize()} e backup salvo para produtos");
     if prod_status.get('removed'):
         if prod_status['removed'] == 'no_change':
-            print('Nenhuma alterao no arquivo de removidos; no criou backup nem sobrescreveu.')
+            print('Nenhuma alterao no arquivo de removidos; no criou backup nem sobrescreveu.');
         else:
-            print(f"{prod_status['removed'].capitalize()} e backup salvo para removidos")
+            print(f"{prod_status['removed'].capitalize()} e backup salvo para removidos");
 
     # orders: sanitizados e removidos
     order_status = saver.save_orders(valid_orders, removed_orders)
     if order_status.get('sanitized'):
         if order_status['sanitized'] == 'no_change':
-            print('Nenhuma alterao no arquivo de orders sanitizados; no criou backup nem sobrescreveu.')
+            print('Nenhuma alterao no arquivo de orders sanitizados; no criou backup nem sobrescreveu.');
         else:
-            print(f"{order_status['sanitized'].capitalize()} e backup salvo para orders sanitizados")
+            print(f"{order_status['sanitized'].capitalize()} e backup salvo para orders sanitizados");
     if order_status.get('removed'):
         if order_status['removed'] == 'no_change':
-            print('Nenhuma alterao no arquivo de orders removidos; no criou backup nem sobrescreveu.')
+            print('Nenhuma alterao no arquivo de orders removidos; no criou backup nem sobrescreveu.');
         else:
-            print(f"{order_status['removed'].capitalize()} e backup salvo para orders removidos")
+            print(f"{order_status['removed'].capitalize()} e backup salvo para orders removidos");
 
 
 if __name__ == '__main__':
