@@ -134,10 +134,10 @@ def _rules_executor(
 
     # Se tivermos estatísticas por categoria, preenche valores numéricos faltantes
     if stats is not None:
-        abroba = _apply_missing_numeric_value_rule_to_products_using_median_or_zero(products, stats, strategy=strategy)
+        numerical_rules_applied = _apply_missing_numeric_value_rule_to_products_using_median_or_zero(products, stats, strategy=strategy)
         print(
             f'Produtos com valores numéricos faltantes ajustados usando {strategy}: '
-            f'{abroba["adjusted_fields"]} campos em {abroba["adjusted_rows"]} produtos (fallback zero: {abroba["fallback_zero_count"]})'
+            f'{numerical_rules_applied["adjusted_fields"]} campos em {numerical_rules_applied["adjusted_rows"]} produtos (fallback zero: {numerical_rules_applied["fallback_zero_count"]})'
         )
 
 
